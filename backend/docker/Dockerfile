@@ -15,7 +15,7 @@ ENV VIRTUAL_ENV=/opt/venv \
 
 RUN uv venv /opt/venv
 
-COPY requirements/dev.txt .
+COPY src/backend/requirements/dev.txt .
 
 RUN uv pip install --no-cache -r dev.txt
 
