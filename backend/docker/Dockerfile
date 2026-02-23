@@ -15,7 +15,7 @@ ENV VIRTUAL_ENV=/opt/venv \
 
 RUN uv venv /opt/venv
 
-COPY src/backend/requirements/dev.txt .
+COPY backend/requirements/dev.txt .
 
 RUN uv pip install --no-cache -r dev.txt
 
@@ -32,6 +32,6 @@ COPY --from=builder /opt/venv /opt/venv
 
 ENV PATH="/opt/venv/bin:$PATH"
 
-COPY backend/ ./backend/
+COPY backend/src/ ./src/
 
 CMD ["python", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
