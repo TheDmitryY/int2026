@@ -14,5 +14,5 @@ jobs:
        uses: actions/checkout@v4
      
      - name: Build Dockerfile
-       run: docker build . --file docker/Dockerfile --tag betterme:latest
+       run: docker build . --file backend/docker/Dockerfile --tag betterme:latest
 
