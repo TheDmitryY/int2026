@@ -1,14 +1,11 @@
-from typing import List, Optional, TYPE_CHECKING
+from typing import Optional
 import datetime
 import uuid
 
-from sqlalchemy import String, Text, ForeignKey, DateTime, func, UUID
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String, DateTime, func, UUID
+from sqlalchemy.orm import Mapped, mapped_column
 
 from database.config import Base
-
-if TYPE_CHECKING:
-    from src.posts.models import Post
 
 
 class User(Base):
@@ -23,8 +20,4 @@ class User(Base):
     role: Mapped[str] = mapped_column(String, default="guest")
     created_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
-    )
-
-    posts: Mapped[List["Post"]] = relationship(
-        "Post", back_populates="author", cascade="all, delete-orphan"
     )

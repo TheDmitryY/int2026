@@ -12,6 +12,12 @@ import uvicorn
 from contextlib import asynccontextmanager
 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await create_db_and_tables()
+    yield
+
+
 app = FastAPI(
     title="BetterMe",
     summary="BetterMe for fecth data from backend. LoL :3",
@@ -19,17 +25,10 @@ app = FastAPI(
     root_path="/api/v1",
     openapi_url="/openapi.json",
     redirect_slashes=True,
-    docs_url="/api/v1/docs",
+    docs_url="/docs",
+    lifespan=lifespan,
 )
 
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    await create_db_and_tables()
-    yield
-
-
-app = FastAPI(lifespan=lifespan, title="eStatya")
 
 ### Providers
 
